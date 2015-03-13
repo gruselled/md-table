@@ -3,6 +3,7 @@
   "description": "AngularJS Material Table",
   "version": "0.0.1",
   "homepage": "https://github.com/gruselled/md-table",
+  "private": true,
   "dependencies": {
     "angular": "^1.3.x",
     "angular-animate": "v1.3.x",
