@@ -29,7 +29,7 @@
 			},
 			link : mdTableLink,
 			controller : mdTableController,
-			templateUrl : 'components/table.html'
+			templateUrl : 'md-table.html'
 		};
 	}
 
