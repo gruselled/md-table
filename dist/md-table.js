@@ -29,7 +29,74 @@
 			},
 			link : mdTableLink,
 			controller : mdTableController,
-			templateUrl : 'md-table.html'
+			template : '<div>\
+    <table class="md-table">\
+        <thead>\
+        <tr class="md-table-headers-row">\
+        <th class="md-table-header" ng-show="enableSelection">\
+        </th>\
+        <th class="md-table-header" ng-repeat="header in headers" ng-class="headersClass[header.contentField]">\
+        <a href ng-if="header.sortableField" ng-click="sort(header.contentField, reverse);">\
+        {{header.label}}\
+    <span class="md-table-caret" ng-show="reverse && header.contentField == predicate">\
+    <img src="https://google.github.io/material-design-icons/navigation/svg/ic_arrow_drop_up_24px.svg">\
+    </span>\
+    <span class="md-table-caret" ng-show="!reverse && header.contentField == predicate">\
+    <img src="https://google.github.io/material-design-icons/navigation/svg/ic_arrow_drop_down_24px.svg">\
+    </span>\
+    <span class="unsorted" ng-show="!(header.contentField == predicate)">\
+    </span>\
+    </a>\
+    <span ng-if="!header.sortableField">\
+    {{header.label}}\
+</span>\
+</th>\
+<th class="md-table-header" ng-show="enableAction" />\
+</tr>\
+</thead>\
+<tbody>\
+<tr class="md-table-content-row" ng-repeat="content in contents | pageFilter: currentPage * pageCount | limitTo: pageCount">\
+<td class="md-table-td-check" ng-show="enableSelection">\
+<md-checkbox aria-label="Select content" ng-model="checkedValue" ng-change="select({checked: checkedValue, selectedContent: content})"></md-checkbox>\
+</td>\
+<td ng-model="header" ng-repeat="header in headers">\
+<div ng-switch="header.contentType">\
+<div class="md-table-thumbs" ng-switch-when="image">\
+<div style="background-image:url({{content[header.contentField]}})"></div>\
+</div>\
+<div class="md-table-content" ng-switch-when="text" ng-class="contentsClass[header.contentField]">\
+{{content[header.contentField]}}\
+</div>\
+    <div class="md-table-content" ng-switch-when="input">\
+    <input ng-value="content[header.contentField]" />\
+    </div>\
+    </div>\
+    </td>\
+    <td class="md-table-td-more" ng-show="enableAction">\
+    <md-button class="md-action" ng-click="action({selectedContent: content})" aria-label="Action">\
+    <img src="http://google.github.io/material-design-icons/navigation/svg/ic_more_vert_24px.svg" />\
+    </md-button>\
+    </td>\
+    </tr>\
+    </tbody>\
+    </table>\
+    <div class="md-table-footer" layout="row">\
+    <span flex></span>\
+    <span ng-show="enablePagination">\
+    <md-button aria-label="Previous" class="md-table-footer-item" ng-click="previous()" ng-disabled="currentPage == 0">\
+    <img src="http://google.github.io/material-design-icons/hardware/svg/ic_keyboard_arrow_left_24px.svg">\
+    </md-button>\
+    <a class="md-table-page-link" href ng-repeat="page in pages">\
+    <md-button aria-label="Index" class="md-primary md-table-footer-item" ng-click="selectPage(page.index)" >\
+    <span ng-class="{\'md-table-active-page\': currentPage == page.index}">{{page.index}}</span>\
+    </md-button>\
+    </a>\
+    <md-button aria-label="Next" class="md-table-footer-item" ng-click="next()" ng-disabled="currentPage == (pages.length - 1)">\
+    <img src="http://google.github.io/material-design-icons/hardware/svg/ic_keyboard_arrow_right_24px.svg">\
+    </md-button>\
+    </span>\
+    </div>\
+    </div>'
 		};
 	}
 
