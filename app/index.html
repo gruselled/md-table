@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" >
+  <head>
+    <title>Sample Angular Material Table</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css"/>
+    <link rel="stylesheet" href="styles/sample.css"/>
+  </head>
+
+ <body layout="column" ng-app="sampleApp"  ng-controller="sampleController">
+ 
+ 	<div layout="row">
+	 	<md-button aria-label="Hello" ng-click="hello()">{{value}}</md-button>
+	 	<span flex></span>
+ 	</div>	
+
+	<!-- Angular JS + AngularJS Material -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+    
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/sampleController.js"></script>
+    
+
+  </body>
+</html>
