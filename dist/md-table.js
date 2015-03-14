@@ -6,13 +6,13 @@
 
 	angular.module('material.components.table', [ 'material.core'])
 			.controller('mdTableController', [ '$scope', '$filter', mdTableController ])
-			.directive('mdTable', mdTableDirective)
+			.directive('mdTable', ['$sce', mdTableDirective])
 			.filter('pageFilter', mdTablePageFilter);
 
 	/**
 	 * Create md-table Directive
 	 */
-	function mdTableDirective() {
+	function mdTableDirective($sce) {
 		return {
 			restrict : 'E',
 			scope : {
@@ -30,7 +30,7 @@
 			},
 			link : mdTableLink,
 			controller : mdTableController,
-			template : '<div>\
+			templateUrl : '<div>\
 				<table class="md-table">\
 			<!-- Header -->\
 			<thead>\
@@ -44,7 +44,7 @@
 					<!-- Content -->\
 					<th class="md-table-header" ng-repeat="header in headers" ng-class="headersClass[header.contentField]">\
 						<!-- Sortable Field -->\
-						<a href ng-if="header.sortableField" ng-click="sort(header.contentField, reverse);"> \
+						<a href ng-if="header.sortableField" ng-click="sort(header.contentField, reverse);">\
 							{{header.label}}\
 							<span class="md-table-caret" ng-show="reverse && header.contentField == predicate">\
 								<img src="https://google.github.io/material-design-icons/navigation/svg/ic_arrow_drop_up_24px.svg">\
@@ -69,7 +69,7 @@
 				<tr class="md-table-content-row" ng-repeat="content in contents | filter: contentFilter | pageFilter: currentPage * pageCount | limitTo: pageCount">\
 					<!-- Selection -->\
 					<td class="md-table-td-check" ng-show="enableSelection">\
-						<md-checkbox aria-label="Select content" ng-model="checkedValue" ng-change="select({checked: checkedValue, selectedContent: content})"></md-checkbox>\
+						<md-checkbox aria-label="Select content" ng-model="checkedValue" ng-change="select({checked: checkedValue, selectedContent: content})">\</md-checkbox>\
 					</td>\
 					<!-- Content -->\
 					<td ng-model="header" ng-repeat="header in headers">\
@@ -99,20 +99,20 @@
 		</table>\
 		<!-- Footer / Pagination -->\
 		<div class="md-table-footer" layout="row">\
-			<span flex></span>\
+			<span flex>\</span>\
 			<span ng-show="enablePagination">\
 				<!-- Previous page -->\
-				<md-button aria-label="Previous" class="md-table-footer-item" ng-click="previous()" ng-disabled="currentPage == 0">\
+				<md-button aria-label="Previous" class="md-table-footer-item" ng-click="previous()" ng-disabled="previousDisabled();">\
 					<img src="http://google.github.io/material-design-icons/hardware/svg/ic_keyboard_arrow_left_24px.svg">\
 				</md-button>\
 				<!-- Current page selection -->\
 				<a class="md-table-page-link" href ng-repeat="page in pages">\
-					<md-button aria-label="Index" class="md-primary md-table-footer-item" ng-click="selectPage(page.index)">\
-						<span ng-class="{\'md-table-active-page\': currentPage == page.index}">{{page.index}}</span>\
+					<md-button aria-label="Index" class="md-primary md-table-footer-item" ng-click="selectPage(page.index)" >\
+						<span ng-class="{\'md-table-active-page\': currentPage == page.index}">\{{page.index}}</span>\
 					</md-button>\
 				</a>\
 				<!-- Next page -->\
-				<md-button aria-label="Next" class="md-table-footer-item" ng-click="next()" ng-disabled="currentPage == (pages.length - 1)">\
+				<md-button aria-label="Next" class="md-table-footer-item" ng-click="next()" ng-disabled="nextDisabled();">\
 					<img src="http://google.github.io/material-design-icons/hardware/svg/ic_keyboard_arrow_right_24px.svg">\
 				</md-button>\
 			</span>\
@@ -127,8 +127,7 @@
 	function mdTableController($scope, $filter) {
 
 		initializeControllerDatas($scope);
-
-		// Asynchronous loading
+		
 		$scope.$watch(function() {
 			return $scope.contents
 		},
@@ -157,6 +156,20 @@
 		 */
 		$scope.previous = function() {
 			$scope.currentPage = $scope.currentPage - 1;
+		}
+		
+		/**
+		 * Determine if  "Previous" button is enable
+		 */
+		$scope.previousDisabled = function() {
+			return $scope.currentPage == 0;
+		}
+		
+		/**
+		 * Determine if  "Next" button is enable
+		 */
+		$scope.nextDisabled = function() {
+			return $scope.pages.length == 0 || $scope.currentPage == ($scope.pages.length - 1);
 		}
 		
 		/**
@@ -209,13 +222,8 @@
 		$scope.predicate = '';
 		// Pagination
 		$scope.currentPage = 0;
-		$scope.pages = []
 		if($scope.contents) {
-			if(!$scope.pageCount) {
-				$scope.pageCount = $scope.contents.length;
-			} else {
-				initializePagination($scope);
-			}
+			initializePagination($scope);
 		} 
 	}
 	
@@ -226,6 +234,9 @@
 	 */
 	function initializePagination($scope) {
 		var pages = [];
+		if(!$scope.pageCount) {
+			$scope.pageCount = $scope.contents.length;
+		}
 		var numberOfPages = Math.ceil($scope.contents.length / $scope.pageCount);
 		for (var i = 0; i < numberOfPages; i++) {
 			pages.push({name: 'page' + i, index: i});
@@ -240,7 +251,7 @@
 		if (headers) {
 			for ( var headerIndex in headers) {
 				if (!headers[headerIndex].label) {
-					console.log("Your header doesn't have label.");
+					console.error("Your header doesn't have label.");
 				} else if (!headers[headerIndex].contentField) {
 					console.error("Your header doesn't have contentField.");
 				}

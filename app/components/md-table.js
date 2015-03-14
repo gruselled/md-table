@@ -6,13 +6,13 @@
 
 	angular.module('material.components.table', [ 'material.core'])
 			.controller('mdTableController', [ '$scope', '$filter', mdTableController ])
-			.directive('mdTable', mdTableDirective)
+			.directive('mdTable', ['$sce', mdTableDirective])
 			.filter('pageFilter', mdTablePageFilter);
 
 	/**
 	 * Create md-table Directive
 	 */
-	function mdTableDirective() {
+	function mdTableDirective($sce) {
 		return {
 			restrict : 'E',
 			scope : {
