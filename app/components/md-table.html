@@ -71,7 +71,7 @@
 		<span flex></span> 
 		<span ng-show="enablePagination"> 
 			<!-- Previous page -->
-			<md-button aria-label="Previous" class="md-table-footer-item" ng-click="previous()" ng-disabled="currentPage == 0"> 
+			<md-button aria-label="Previous" class="md-table-footer-item" ng-click="previous()" ng-disabled="previousDisabled();"> 
 				<img src="http://google.github.io/material-design-icons/hardware/svg/ic_keyboard_arrow_left_24px.svg">
 			</md-button> 
 			<!-- Current page selection -->
@@ -81,7 +81,7 @@
 				</md-button>
 			</a> 
 			<!-- Next page -->
-			<md-button aria-label="Next" class="md-table-footer-item" ng-click="next()" ng-disabled="currentPage == (pages.length - 1)"> 
+			<md-button aria-label="Next" class="md-table-footer-item" ng-click="next()" ng-disabled="nextDisabled();"> 
 				<img src="http://google.github.io/material-design-icons/hardware/svg/ic_keyboard_arrow_right_24px.svg">
 			</md-button>
 		</span>

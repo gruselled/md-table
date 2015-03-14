@@ -72,6 +72,20 @@
 		}
 		
 		/**
+		 * Determine if  "Previous" button is enable
+		 */
+		$scope.previousDisabled = function() {
+			return $scope.currentPage == 0;
+		}
+		
+		/**
+		 * Determine if  "Next" button is enable
+		 */
+		$scope.nextDisabled = function() {
+			return $scope.pages.length == 0 || $scope.currentPage == ($scope.pages.length - 1);
+		}
+		
+		/**
 		 * Select the page
 		 */
 		$scope.selectPage = function(pageIndex) {
@@ -121,13 +135,8 @@
 		$scope.predicate = '';
 		// Pagination
 		$scope.currentPage = 0;
-		$scope.pages = []
 		if($scope.contents) {
-			if(!$scope.pageCount) {
-				$scope.pageCount = $scope.contents.length;
-			} else {
-				initializePagination($scope);
-			}
+			initializePagination($scope);
 		} 
 	}
 	
@@ -138,6 +147,9 @@
 	 */
 	function initializePagination($scope) {
 		var pages = [];
+		if(!$scope.pageCount) {
+			$scope.pageCount = $scope.contents.length;
+		}
 		var numberOfPages = Math.ceil($scope.contents.length / $scope.pageCount);
 		for (var i = 0; i < numberOfPages; i++) {
 			pages.push({name: 'page' + i, index: i});
