@@ -214,9 +214,6 @@
 	 * Initialization of controller's data
 	 */
 	function initializeControllerDatas($scope) {
-		verifyHeaders($scope.headers);
-		verifyContents($scope.contents);
-		
 		// Sorting
 		$scope.reverse = true;
 		$scope.predicate = '';
