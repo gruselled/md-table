@@ -40,8 +40,6 @@
 	function mdTableController($scope, $filter) {
 
 		initializeControllerDatas($scope);
-		verifyHeaders($scope.headers);
-		verifyContents($scope.contents);
 
 		/**
 		 * Sorting content
@@ -108,16 +106,22 @@
 	 * Initialization of controller's data
 	 */
 	function initializeControllerDatas($scope) {
+		verifyHeaders($scope.headers);
+		verifyContents($scope.contents);
+		
 		// Sorting
 		$scope.reverse = true;
 		$scope.predicate = '';
 		// Pagination
 		$scope.currentPage = 0;
-		if(!$scope.pageCount) {
-			$scope.pageCount = $scope.contents.length;
-		} else {
-			initializePagination($scope);
-		}
+		$scope.pages = []
+		if($scope.contents) {
+			if(!$scope.pageCount) {
+				$scope.pageCount = $scope.contents.length;
+			} else {
+				initializePagination($scope);
+			}
+		} 
 	}
 	
 	/**
@@ -141,13 +145,13 @@
 		if (headers) {
 			for ( var headerIndex in headers) {
 				if (!headers[headerIndex].label) {
-					console.log("Your header doesn't have label.");
+					console.error("Your header doesn't have label.");
 				} else if (!headers[headerIndex].contentField) {
-					console.log("Your header doesn't have contentField.");
+					console.error("Your header doesn't have contentField.");
 				}
 			}
 		} else {
-			console.log('mdTable need headers attribute.');
+			console.error('mdTable need headers attribute.');
 		}
 	}
 
@@ -156,7 +160,7 @@
 	 */
 	function verifyContents(contents) {
 		if (!contents) {
-			console.log('mdTable need contents attribute.');
+			console.error('mdTable need contents attribute.');
 		}
 	}
 
