@@ -17,12 +17,34 @@
 
 <body layout="column" ng-app="sampleApp" ng-controller="sampleController" flex>
 
+<md-toolbar layout="column" class="md-small md-hue-2">
+	<div class="md-toolbar-tools">
+	
+		<div layout="row" flex>
+			<!--  Blank -->
+			<span flex ng-show="!toggleSearch"></span>
+			
+			<!--  Search bar -->
+			<md-input-container ng-show="toggleSearch" style="padding-left:88px" flex> 
+				<input type="text" ng-model="filterValue" ng-blur="toggleSearch = !toggleSearch" /> 
+			</md-input-container>
+		</div>
+		
+		<!-- Search icon -->
+		<div class="md-toolbar-item md-tools">
+			<a href ng-click="toggleSearch = !toggleSearch" class="md-button md-default-theme"> 
+				<md-icon md-svg-src="https://google.github.io/material-design-icons/action/svg/ic_search_24px.svg"></md-icon>
+			</a>
+		</div>
+	</div>
+</md-toolbar> 
 
 <md-table headers-class="headerClass" contents-class="contentClass"
           headers="headers" contents="contents"
           pagination="true" page-count="5"
           action="true" on-action="deleteOperation(selectedContent, $event)"
-          selection="true" on-select="selectOperation(checked, selectedContent)">
+          selection="true" on-select="selectOperation(checked, selectedContent)"
+          filter="filterValue">
 </md-table>
 
 <!-- Angular JS + AngularJS Material -->

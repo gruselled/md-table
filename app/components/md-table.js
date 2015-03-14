@@ -25,11 +25,12 @@
 				enableAction: '=action',
 				action: '&onAction',
 				enablePagination: '=pagination',
-				pageCount: '='
+				pageCount: '=',
+				contentFilter: '=filter' 
 			},
 			link : mdTableLink,
 			controller : mdTableController,
-			templateUrl : 'md-table.html'
+			templateUrl : 'components/md-table.html'
 		};
 	}
 

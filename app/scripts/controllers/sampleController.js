@@ -13,6 +13,7 @@
 
         $scope.selectedContent = '';
 
+        
         $scope.headerClass = {date: 'table-date-content', label:'fill-content', amount: 'table-amount-content'};
         $scope.contentClass = {date: 'bold', label:'grey', amount: 'grey'};
 

@@ -37,7 +37,6 @@ gulp.task('jshint', function () {
 });
 
 gulp.task('dist', function () {
-    // For best performance, don't add Sass partials to `gulp.src`
     return gulp.src([
         'app/components/*.*'
     ]).pipe(gulp.dest('dist'));

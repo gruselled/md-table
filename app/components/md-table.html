@@ -34,7 +34,7 @@
 		</thead>
 		<!-- Body -->
 		<tbody>
-			<tr class="md-table-content-row" ng-repeat="content in contents | pageFilter: currentPage * pageCount | limitTo: pageCount">
+			<tr class="md-table-content-row" ng-repeat="content in contents | filter: contentFilter | pageFilter: currentPage * pageCount | limitTo: pageCount">
 				<!-- Selection -->
 				<td class="md-table-td-check" ng-show="enableSelection">
 					<md-checkbox aria-label="Select content" ng-model="checkedValue" ng-change="select({checked: checkedValue, selectedContent: content})"></md-checkbox>
