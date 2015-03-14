@@ -18,7 +18,6 @@
         $scope.contentClass = {date: 'bold', label:'grey', amount: 'grey'};
 
         $scope.headers = initHeaders();
-        $scope.contents = [];
         
         $scope.loadDatas = function() {
         	$scope.contents = initContent($filter);

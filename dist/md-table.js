@@ -6,13 +6,13 @@
 
 	angular.module('material.components.table', [ 'material.core'])
 			.controller('mdTableController', [ '$scope', '$filter', mdTableController ])
-			.directive('mdTable', ['$sce', mdTableDirective])
+			.directive('mdTable', mdTableDirective)
 			.filter('pageFilter', mdTablePageFilter);
-
+		
 	/**
 	 * Create md-table Directive
 	 */
-	function mdTableDirective($sce) {
+	function mdTableDirective() {
 		return {
 			restrict : 'E',
 			scope : {
@@ -25,7 +25,7 @@
 				enableAction: '=action',
 				action: '&onAction',
 				enablePagination: '=pagination',
-				pageCount: '=',
+				pageCount: '@',
 				contentFilter: '=filter' 
 			},
 			link : mdTableLink,
@@ -222,9 +222,7 @@
 		$scope.predicate = '';
 		// Pagination
 		$scope.currentPage = 0;
-		if($scope.contents) {
-			initializePagination($scope);
-		} 
+		initializePagination($scope);
 	}
 	
 	/**
@@ -234,40 +232,16 @@
 	 */
 	function initializePagination($scope) {
 		var pages = [];
-		if(!$scope.pageCount) {
-			$scope.pageCount = $scope.contents.length;
-		}
-		var numberOfPages = Math.ceil($scope.contents.length / $scope.pageCount);
-		for (var i = 0; i < numberOfPages; i++) {
-			pages.push({name: 'page' + i, index: i});
+		if($scope.contents) {
+			if(!$scope.pageCount) {
+				$scope.pageCount = $scope.contents.length;
+			}
+			var numberOfPages = Math.ceil($scope.contents.length / $scope.pageCount);
+			for (var i = 0; i < numberOfPages; i++) {
+				pages.push({name: 'page' + i, index: i});
+			}
 		}
 		$scope.pages = pages;
-	}
-
-	/**
-	 * Checking mandatory Fields in the headers attribute
-	 */
-	function verifyHeaders(headers) {
-		if (headers) {
-			for ( var headerIndex in headers) {
-				if (!headers[headerIndex].label) {
-					console.error("Your header doesn't have label.");
-				} else if (!headers[headerIndex].contentField) {
-					console.error("Your header doesn't have contentField.");
-				}
-			}
-		} else {
-			console.error('mdTable need headers attribute.');
-		}
-	}
-
-	/**
-	 * Checking mandatory Fields in the contents attribute
-	 */
-	function verifyContents(contents) {
-		if (!contents) {
-			console.error('mdTable need contents attribute.');
-		}
 	}
 
 	/**
