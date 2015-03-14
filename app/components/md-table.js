@@ -25,7 +25,7 @@
 				enableAction: '=action',
 				action: '&onAction',
 				enablePagination: '=pagination',
-				pageCount: '@',
+				pageCount: '=?',
 				contentFilter: '=filter' 
 			},
 			link : mdTableLink,

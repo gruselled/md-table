@@ -7,6 +7,7 @@
 	
 	function SampleController($scope, $filter, $mdBottomSheet) {
 		$scope.value = 'Hello Angular';
+		$scope.pageItems = 6;
 		$scope.hello = function() {
 			alert('Hello AngularJS Material !');
 		}
