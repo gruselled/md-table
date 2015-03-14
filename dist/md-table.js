@@ -30,14 +30,14 @@
 			},
 			link : mdTableLink,
 			controller : mdTableController,
-			templateUrl : '<div>\
+			template : '<div>\
 				<table class="md-table">\
 			<!-- Header -->\
 			<thead>\
 				<tr class="md-table-headers-row">\
 					<!-- Multiple selection -->\
 					<th class="md-table-header" ng-show="enableSelection">\
-						<!-- \
+						<!--\
 						<md-checkbox aria-label="Select all" on-change="selectAll(checked)"/>\
 						 -->\
 					</th>\
@@ -69,7 +69,7 @@
 				<tr class="md-table-content-row" ng-repeat="content in contents | filter: contentFilter | pageFilter: currentPage * pageCount | limitTo: pageCount">\
 					<!-- Selection -->\
 					<td class="md-table-td-check" ng-show="enableSelection">\
-						<md-checkbox aria-label="Select content" ng-model="checkedValue" ng-change="select({checked: checkedValue, selectedContent: content})">\</md-checkbox>\
+						<md-checkbox aria-label="Select content" ng-model="checkedValue" ng-change="select({checked: checkedValue, selectedContent: content})"></md-checkbox>\
 					</td>\
 					<!-- Content -->\
 					<td ng-model="header" ng-repeat="header in headers">\
@@ -99,21 +99,21 @@
 		</table>\
 		<!-- Footer / Pagination -->\
 		<div class="md-table-footer" layout="row">\
-			<span flex>\</span>\
+			<span flex></span>\
 			<span ng-show="enablePagination">\
 				<!-- Previous page -->\
 				<md-button aria-label="Previous" class="md-table-footer-item" ng-click="previous()" ng-disabled="previousDisabled();">\
-					<img src="http://google.github.io/material-design-icons/hardware/svg/ic_keyboard_arrow_left_24px.svg">\
+					<img src="http://google.github.io/material-design-icons/hardware/svg/ic_keyboard_arrow_left_24px.svg" />\
 				</md-button>\
 				<!-- Current page selection -->\
 				<a class="md-table-page-link" href ng-repeat="page in pages">\
-					<md-button aria-label="Index" class="md-primary md-table-footer-item" ng-click="selectPage(page.index)" >\
-						<span ng-class="{\'md-table-active-page\': currentPage == page.index}">\{{page.index}}</span>\
+					<md-button aria-label="Index" class="md-primary md-table-footer-item" ng-click="selectPage(page.index)">\
+						<span ng-class="{\'md-table-active-page\': currentPage == page.index}">{{page.index}}</span>\
 					</md-button>\
 				</a>\
 				<!-- Next page -->\
 				<md-button aria-label="Next" class="md-table-footer-item" ng-click="next()" ng-disabled="nextDisabled();">\
-					<img src="http://google.github.io/material-design-icons/hardware/svg/ic_keyboard_arrow_right_24px.svg">\
+					<img src="http://google.github.io/material-design-icons/hardware/svg/ic_keyboard_arrow_right_24px.svg" />\
 				</md-button>\
 			</span>\
 		</div>\
