@@ -43,9 +43,10 @@
           headers="headers" contents="contents"
           pagination="true" page-count="5"
           action="true" on-action="deleteOperation(selectedContent, $event)"
-          selection="true" on-select="selectOperation(checked, selectedContent)"
-          filter="filterValue">
+          selection="true" on-select="selectOperation(checked, selectedContent)">
 </md-table>
+
+<md-button arial-label="Load Datas" ng-click="loadDatas()">Load Datas</md-button>
 
 <!-- Angular JS + AngularJS Material -->
 <script src="bower_components/angular/angular.js"></script>

@@ -128,6 +128,13 @@
 
 		initializeControllerDatas($scope);
 
+		// Asynchronous loading
+		$scope.$watch(function() {
+			return $scope.contents
+		},
+		function() {
+			initializePagination($scope);
+		});
 
 		/**
 		 * Sorting content

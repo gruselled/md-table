@@ -18,7 +18,11 @@
         $scope.contentClass = {date: 'bold', label:'grey', amount: 'grey'};
 
         $scope.headers = initHeaders();
-//        $scope.contents = initContent($filter);
+        $scope.contents = [];
+        
+        $scope.loadDatas = function() {
+        	$scope.contents = initContent($filter);
+        }
 
 
         $scope.deleteOperation = function(selectedContent, $event) {

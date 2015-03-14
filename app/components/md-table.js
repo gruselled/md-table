@@ -40,6 +40,13 @@
 	function mdTableController($scope, $filter) {
 
 		initializeControllerDatas($scope);
+		
+		$scope.$watch(function() {
+			return $scope.contents
+		},
+		function() {
+			initializePagination($scope);
+		});
 
 		/**
 		 * Sorting content
