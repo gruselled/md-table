@@ -128,7 +128,7 @@
 
 		initializeControllerDatas($scope);
 		
-		$scope.$watch(function() {
+		$scope.$watchCollection(function() {
 			return $scope.contents
 		},
 		function() {

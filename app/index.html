@@ -40,10 +40,14 @@
 </md-toolbar> 
 
 <md-table headers-class="headerClass" contents-class="contentClass"
-          headers="headers" contents="contents" page-count="pageItems">
+          headers="headers" contents="contents"
+          pagination="true" page-count="pageItems"
+          action="true" on-action="deleteOperation(selectedContent, $event)"
+          selection="true" on-select="selectOperation(checked, selectedContent)"
+          filter="filterValue">
 </md-table>
 
-<md-button arial-label="Load Datas" ng-click="loadDatas()">Load Datas</md-button>
+<md-button arial-label="Load Datas" ng-click="loadDatas();">Load datas</md-button>
 
 <!-- Angular JS + AngularJS Material -->
 <script src="bower_components/angular/angular.js"></script>
