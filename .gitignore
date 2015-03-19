@@ -7,3 +7,5 @@ tmp
 .idea
 .project
 app/jspm_packages
+/nbproject/private/
+/nbproject/
