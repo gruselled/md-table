@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('material.components.table', ['material.core'])
-        .controller('mdTableController', ['$scope', '$filter', mdTableController])
+        .controller('mdTableController', ['$scope', '$filter', '$q', mdTableController])
         .directive('mdTable', mdTableDirective)
         .filter('pageFilter', mdTablePageFilter);
 
@@ -40,9 +40,9 @@ function mdTableDirective() {
  * @param {type} $filter
  * @returns {undefined}
  */
-function mdTableController($scope, $filter) {
+function mdTableController($scope, $filter, $q) {
 
-    initializeControllerDatas($scope);
+    initializeControllerDatas($scope, $q);
 
     $scope.$watchCollection(function () {
         return $scope.contents;
@@ -131,7 +131,7 @@ function mdTablePageFilter() {
 /**
  * Initialization of controller's data
  */
-function initializeControllerDatas($scope) {
+function initializeControllerDatas($scope, $q) {
     $q.when($scope.content);
     // Sorting
     $scope.reverse = true;
