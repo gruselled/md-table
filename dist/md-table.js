@@ -128,7 +128,7 @@ function mdTableController($scope, $filter, $q) {
     initializeControllerDatas($scope, $q);
 
     $scope.$watchCollection(function () {
-        return $scope.contents
+        return $scope.contents.$$state.value;
     },
             function () {
                 initializePagination($scope);
@@ -141,42 +141,42 @@ function mdTableController($scope, $filter, $q) {
         $scope.reverse = !reverse;
         $scope.contents = $filter('orderBy')($scope.contents, predicate, $scope.reverse);
         $scope.predicate = predicate;
-    }
+    };
 
     /**
      * Display next page
      */
     $scope.next = function () {
         $scope.currentPage = $scope.currentPage + 1;
-    }
+    };
 
     /**
      * Display previous page
      */
     $scope.previous = function () {
         $scope.currentPage = $scope.currentPage - 1;
-    }
+    };
 
     /**
      * Determine if  "Previous" button is enable
      */
     $scope.previousDisabled = function () {
         return $scope.currentPage == 0;
-    }
+    };
 
     /**
      * Determine if  "Next" button is enable
      */
     $scope.nextDisabled = function () {
         return $scope.pages.length == 0 || $scope.currentPage == ($scope.pages.length - 1);
-    }
+    };
 
     /**
      * Select the page
      */
     $scope.selectPage = function (pageIndex) {
         $scope.currentPage = pageIndex;
-    }
+    };
 
     /* TODO Not implemented yet
      $scope.selectAll = function(checked) {
