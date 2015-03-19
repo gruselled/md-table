@@ -17,7 +17,7 @@ function mdTableDirective() {
         scope: {
             headers: '=',
             headersClass: '=',
-            contents: '=',
+            values: '=contents',
             contentsClass: '=',
             enableSelection: '=selection',
             select: '&onSelect',
@@ -45,11 +45,11 @@ function mdTableController($scope, $filter, $q) {
     initializeControllerDatas($scope, $q);
 
     $scope.$watchCollection(function () {
-        return $scope.contents.$$state.value;
+        return $scope.contents;
     },
-            function () {
-                initializePagination($scope);
-            });
+    function () {
+        initializePagination($scope);
+    });
 
     /**
      * Sorting content
@@ -117,11 +117,9 @@ function mdTableLink($scope, $element, $attr) {
  */
 function mdTablePageFilter() {
     return function (contents, selectedPage) {
-        var status = contents.$$state.status;
         selectedPage = +selectedPage;
-        if (status !== 0) {
-            var values = contents.$$state.value;
-            return values.slice(selectedPage);
+        if (contents) {
+            return contents.slice(selectedPage);
         } else {
             return '';
         }
@@ -132,7 +130,9 @@ function mdTablePageFilter() {
  * Initialization of controller's data
  */
 function initializeControllerDatas($scope, $q) {
-    $q.when($scope.content);
+    $q.when($scope.values).then(function (values) {
+        $scope.contents = values;
+    });
     // Sorting
     $scope.reverse = true;
     $scope.predicate = '';
@@ -147,10 +147,9 @@ function initializeControllerDatas($scope, $q) {
  * @return Pages representing by an array
  */
 function initializePagination($scope) {
-    var status = $scope.contents.$$state.status;
+    var contents = $scope.contents;
     var pages = [];
-    if (status !== 0) {
-        var contents = $scope.contents.$$state.value;
+    if (contents) {
         if (!$scope.pageCount) {
             $scope.pageCount = contents.length;
         }
