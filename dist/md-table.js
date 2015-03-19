@@ -214,7 +214,7 @@ function mdTablePageFilter() {
 /**
  * Initialization of controller's data
  */
-function initializeControllerDatas($scope) {
+function initializeControllerDatas($scope, $q) {
     $q.when($scope.content);
     // Sorting
     $scope.reverse = true;
