@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('material.components.table', ['material.core'])
-        .controller('mdTableController', ['$scope', '$filter', '$q', mdTableController])
+        .controller('mdTableController', ['$scope', '$filter', mdTableController])
         .directive('mdTable', mdTableDirective)
         .filter('pageFilter', mdTablePageFilter);
 
@@ -17,7 +17,7 @@ function mdTableDirective() {
         scope: {
             headers: '=',
             headersClass: '=',
-            values: '=contents',
+            contents: '=',
             contentsClass: '=',
             enableSelection: '=selection',
             select: '&onSelect',
@@ -123,16 +123,17 @@ function mdTableDirective() {
 /**
  * Create mdTableController
  */
-function mdTableController($scope, $filter, $q) {
-
-    initializeControllerDatas($scope, $q);
+function mdTableController($scope, $filter) {
+    
+    initializeControllerDatas($scope);
+    initializePagination($scope);
 
     $scope.$watchCollection(function () {
         return $scope.contents;
     },
-            function () {
-                initializePagination($scope);
-            });
+    function () {
+        initializePagination($scope);
+    });
 
     /**
      * Sorting content
@@ -212,16 +213,12 @@ function mdTablePageFilter() {
 /**
  * Initialization of controller's data
  */
-function initializeControllerDatas($scope, $q) {
-    $q.when($scope.values).then(function (values) {
-        $scope.contents = values;
-    });
+function initializeControllerDatas($scope) {
     // Sorting
     $scope.reverse = true;
     $scope.predicate = '';
     // Pagination
     $scope.currentPage = 0;
-    initializePagination($scope);
 }
 
 /**

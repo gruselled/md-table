@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('material.components.table', ['material.core'])
-        .controller('mdTableController', ['$scope', '$filter', '$q', mdTableController])
+        .controller('mdTableController', ['$scope', '$filter', mdTableController])
         .directive('mdTable', mdTableDirective)
         .filter('pageFilter', mdTablePageFilter);
 
@@ -17,7 +17,7 @@ function mdTableDirective() {
         scope: {
             headers: '=',
             headersClass: '=',
-            values: '=contents',
+            contents: '=',
             contentsClass: '=',
             enableSelection: '=selection',
             select: '&onSelect',
@@ -40,9 +40,10 @@ function mdTableDirective() {
  * @param {type} $filter
  * @returns {undefined}
  */
-function mdTableController($scope, $filter, $q) {
+function mdTableController($scope, $filter) {
 
-    initializeControllerDatas($scope, $q);
+    initializeControllerDatas($scope);
+    initializePagination($scope);
 
     $scope.$watchCollection(function () {
         return $scope.contents;
@@ -129,10 +130,7 @@ function mdTablePageFilter() {
 /**
  * Initialization of controller's data
  */
-function initializeControllerDatas($scope, $q) {
-    $q.when($scope.values).then(function (values) {
-        $scope.contents = values;
-    });
+function initializeControllerDatas($scope) {
     // Sorting
     $scope.reverse = true;
     $scope.predicate = '';
