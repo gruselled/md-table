@@ -35,3 +35,9 @@ gulp.task('jshint', function () {
     .pipe($.jshint.reporter('jshint-stylish'))
     .pipe($.if(!browserSync.active, $.jshint.reporter('fail')));
 });
+
+gulp.task('dist', function () {
+    return gulp.src([
+        'app/components/*.*'
+    ]).pipe(gulp.dest('dist'));
+});

@@ -1,33 +1,66 @@
 <!DOCTYPE html>
-<html lang="en" >
-  <head>
+<html lang="en">
+<head>
     <title>Sample Angular Material Table</title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no"/>
 
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css"/>
+    <!-- md-table style -->
+    <link rel="stylesheet" href="components/md-table.css"/>
+
     <link rel="stylesheet" href="styles/sample.css"/>
-  </head>
+</head>
 
- <body layout="column" ng-app="sampleApp"  ng-controller="sampleController">
- 
- 	<div layout="row">
-	 	<md-button aria-label="Hello" ng-click="hello()">{{value}}</md-button>
-	 	<span flex></span>
- 	</div>	
+<body layout="column" ng-app="sampleApp" ng-controller="sampleController" flex>
 
-	<!-- Angular JS + AngularJS Material -->
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-aria/angular-aria.js"></script>
-    <script src="bower_components/angular-material/angular-material.js"></script>
-    
-    <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/sampleController.js"></script>
-    
+<md-toolbar layout="column" class="md-small md-hue-2">
+	<div class="md-toolbar-tools">
+	
+		<div layout="row" flex>
+			<!--  Blank -->
+			<span flex ng-show="!toggleSearch"></span>
+			
+			<!--  Search bar -->
+			<md-input-container ng-show="toggleSearch" style="padding-left:88px" flex> 
+				<input type="text" ng-model="filterValue" ng-blur="toggleSearch = !toggleSearch" /> 
+			</md-input-container>
+		</div>
+		
+		<!-- Search icon -->
+		<div class="md-toolbar-item md-tools">
+			<a href ng-click="toggleSearch = !toggleSearch" class="md-button md-default-theme"> 
+				<md-icon md-svg-src="https://google.github.io/material-design-icons/action/svg/ic_search_24px.svg"></md-icon>
+			</a>
+		</div>
+	</div>
+</md-toolbar> 
 
-  </body>
+<md-table headers-class="headerClass" contents-class="contentClass"
+          headers="headers" contents="contents"
+          pagination="true" page-count="pageItems"
+          action="true" on-action="deleteOperation(selectedContent, $event)"
+          selection="true" on-select="selectOperation(checked, selectedContent)"
+          filter="filterValue">
+</md-table>
+
+<md-button arial-label="Load Datas" ng-click="loadDatas();">Load datas</md-button>
+
+<!-- Angular JS + AngularJS Material -->
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-aria/angular-aria.js"></script>
+<script src="bower_components/angular-material/angular-material.js"></script>
+
+<!-- md-table -->
+<script src="components/md-table.js"></script>
+
+<!-- Sample -->
+<script src="scripts/app.js"></script>
+<script src="scripts/controllers/sampleController.js"></script>
+
+</body>
 </html>

@@ -1,0 +1,26 @@
+.md-table-headers-row {
+    height: 70px;
+    vertical-align: middle;
+}
+
+.table-date-content {
+    min-width: 105px;
+    width: 105px;
+}
+
+.fill-content {
+    width: auto;
+}
+
+.table-amount-content {
+    min-width: 110px;
+    width: 110px;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+.grey {
+    color: grey;
+}

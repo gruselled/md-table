@@ -2,6 +2,6 @@
 	
 	'use strict';
 	
-	angular.module('sampleApp', ['ngMaterial']);
+	angular.module('sampleApp', ['ngMaterial', 'material.components.table']);
 	
 })();
