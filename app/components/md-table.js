@@ -6,7 +6,8 @@
 angular.module('material.components.table', ['material.core'])
         .controller('mdTableController', ['$scope', '$filter', mdTableController])
         .directive('mdTable', mdTableDirective)
-        .filter('pageFilter', mdTablePageFilter);
+        .filter('pageFilter', mdTablePageFilter)
+        .filter('contentFilter', ['$filter', mdTableContentFilter]);
 
 /**
  * Create md-table Directive
@@ -123,6 +124,27 @@ function mdTablePageFilter() {
             return contents.slice(selectedPage);
         } else {
             return '';
+        }
+    };
+}
+
+/**
+ * @return The filter use to paginate
+ */
+function mdTableContentFilter($filter) {
+    return function (value, contentFilter) {
+        if(contentFilter) {
+            if(contentFilter.pattern) {
+                var result = $filter(contentFilter.filter)(value, contentFilter.pattern);
+                console.log(result);
+                return result; 
+            } else {
+                var result = $filter(contentFilter.filter)(value);
+                console.log(result);
+                return result;
+            }
+        } else {
+            return value;
         }
     };
 }

@@ -21,7 +21,7 @@
         $scope.headers = initHeaders();
         
         $scope.loadDatas = function() {
-        	$scope.contents = initContent($filter);
+        	$scope.contents = initContent();
         }
 
 
@@ -50,12 +50,19 @@
             label: 'Date',
             sortableField: true,
             contentField: 'date',
-            contentType: 'text'
+            contentType: 'text',
+            contentFilter: { 
+                filter: 'date',
+                pattern : 'dd/MM/yyyy'
+            }
         },{
             label: 'Label',
             sortableField: true,
             contentField: 'label',
-            contentType: 'text'
+            contentType: 'text',
+            contentFilter: { 
+                filter: 'uppercase'
+            }
         }, {
             label: 'Amount',
             sortableField: true,
@@ -64,17 +71,17 @@
         }];
     }
 
-    function initContent($filter) {
+    function initContent() {
         return [
-            { date: $filter('date')(new Date().getMilliseconds(), 'dd/MM/yyyy'), label: 'Task 1', amount: 10.0},
-            { date: $filter('date')(new Date().getMilliseconds(), 'dd/MM/yyyy'), label: 'Task 2', amount: 20.0},
-            { date: $filter('date')(new Date().getMilliseconds(), 'dd/MM/yyyy'), label: 'Task 3', amount: 90.0},
-            { date: $filter('date')(new Date().getMilliseconds(), 'dd/MM/yyyy'), label: 'Task 4', amount: 60.0},
-            { date: $filter('date')(new Date().getMilliseconds(), 'dd/MM/yyyy'), label: 'Task 5', amount: 70.0},
-            { date: $filter('date')(new Date().getMilliseconds(), 'dd/MM/yyyy'), label: 'Task 6', amount: 30.0},
-            { date: $filter('date')(new Date().getMilliseconds(), 'dd/MM/yyyy'), label: 'Task 7', amount: 50.0},
-            { date: $filter('date')(new Date().getMilliseconds(), 'dd/MM/yyyy'), label: 'Task 8', amount: 80.0},
-            { date: $filter('date')(new Date().getMilliseconds(), 'dd/MM/yyyy'), label: 'Task 9', amount: 5.0}
+            { date: new Date().getMilliseconds(), label: 'Task 1', amount: 10.0},
+            { date: new Date().getMilliseconds(), label: 'Task 2', amount: 20.0},
+            { date: new Date().getMilliseconds(), label: 'Task 3', amount: 90.0},
+            { date: new Date().getMilliseconds(), label: 'Task 4', amount: 60.0},
+            { date: new Date().getMilliseconds(), label: 'Task 5', amount: 70.0},
+            { date: new Date().getMilliseconds(), label: 'Task 6', amount: 30.0},
+            { date: new Date().getMilliseconds(), label: 'Task 7', amount: 50.0},
+            { date: new Date().getMilliseconds(), label: 'Task 8', amount: 80.0},
+            { date: new Date().getMilliseconds(), label: 'Task 9', amount: 5.0}
         ];
     }
 	
