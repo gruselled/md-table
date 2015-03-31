@@ -67,7 +67,7 @@
             label: 'Amount',
             sortableField: true,
             contentField: 'amount',
-            contentType: 'text'
+            contentType: 'input'
         }];
     }
 

@@ -48,17 +48,11 @@
 						</div>
 						<!-- Input -->
 						<div class="md-table-content" ng-switch-when="input">
-                                                    <input ng-value="content[header.contentField]" />
+                              <input ng-model="content[header.contentField]" />
 						</div>
-                                                <!-- Text -->
-                                                <!--
+                        <!-- Text -->
 						<div class="md-table-content" ng-switch-when="text" ng-class="contentsClass[header.contentField]">
-                                                    {{content[header.contentField]}}
-						</div>
-                                                -->
-                                                <!-- Date -->
-						<div class="md-table-content" ng-switch-when="text" ng-class="contentsClass[header.contentField]">
-                                                    {{content[header.contentField] | contentFilter : header.contentFilter}}
+                           {{content[header.contentField] | contentFilter : header.contentFilter}}
 						</div>
                                                 
 					</div>

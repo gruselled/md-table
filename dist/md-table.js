@@ -77,14 +77,14 @@ function mdTableDirective() {
 							<div class="md-table-thumbs" ng-switch-when="image">\
 								<div style="background-image:url({{content[header.contentField]}})"></div>\
 							</div>\
-							<!-- Text -->\
-							<div class="md-table-content" ng-switch-when="text" ng-class="contentsClass[header.contentField]">\
-								{{content[header.contentField]}}\
-							</div>\
-							<!-- Input -->\
-							<div class="md-table-content" ng-switch-when="input">\
-								<input ng-value="content[header.contentField]" />\
-							</div>\
+                            <!-- Input -->\
+                            <div class="md-table-content" ng-switch-when="input">\
+                                <input ng-model="content[header.contentField]" />\
+                            </div>\
+                            <!-- Text -->\
+                            <div class="md-table-content" ng-switch-when="text" ng-class="contentsClass[header.contentField]">\
+                            {{content[header.contentField] | contentFilter : header.contentFilter}}\
+                            </div>\
 						</div>\
 					</td>\
 					<!-- Actions -->\
