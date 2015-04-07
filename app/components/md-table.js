@@ -136,11 +136,9 @@ function mdTableContentFilter($filter) {
         if(contentFilter) {
             if(contentFilter.pattern) {
                 var result = $filter(contentFilter.filter)(value, contentFilter.pattern);
-                console.log(result);
-                return result; 
+                return result;
             } else {
                 var result = $filter(contentFilter.filter)(value);
-                console.log(result);
                 return result;
             }
         } else {
